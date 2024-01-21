@@ -3,24 +3,26 @@ package com.example.exception.exception;
 import com.example.exception.model.Api;
 import java.util.NoSuchElementException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
-
-@RestControllerAdvice(basePackages = "com.example.exception.controller") // 특정 패키지의 예외만 처리하도록 설정할 수 있다.
+@RestControllerAdvice
+//@RestControllerAdvice(basePackages = "com.example.exception.controller") // 특정 패키지의 예외만 처리하도록 설정할 수 있다.
 //@RestControllerAdvice(basePackageClasses = {RestApiBController.class}) // 특정 클래스의 예외만 처리하도록 설정할 수 있다.
+@Order(1) // 글로벌 예외 핸들러보다 더 우선적으로 예외 처리
 public class RestApiExceptionHandler {
 
-    @ExceptionHandler(value = {Exception.class})
+    /*@ExceptionHandler(value = {Exception.class})
     public ResponseEntity exception(Exception e) {
         log.error("RestApiExceptionHandler", e);
 
         return ResponseEntity.status(200).build();
-    }
+    }*/
+
 
 
     @ExceptionHandler(value = {IndexOutOfBoundsException.class})
